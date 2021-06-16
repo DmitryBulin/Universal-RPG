@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UniversalRPG.Items;
 
 namespace UniversalRPG
@@ -34,6 +35,16 @@ namespace UniversalRPG
                 itemToReturn = itemsList[0];
             }
             return itemToReturn;
+        }
+
+        public void SetItemIcon(Image image, Item item)
+        {
+            item.Icon.LoadAssetAsync<Sprite>().Completed += t => image.sprite = t.Result;
+        }
+
+        public void SetItemIcon(SpriteRenderer spriteRenderer, Item item)
+        {
+            item.Icon.LoadAssetAsync<Sprite>().Completed += t => spriteRenderer.sprite = t.Result;
         }
 
     }

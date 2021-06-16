@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f538e5043423d064490d65a74bd885a6, type: 3}
   m_Name: SmallHealingPotion
   m_EditorClassIdentifier: 
-  itemID: SmallHealingPotion
-  maximumStackCapacity: 20
-  rarity: 0
-  icon: {fileID: 0}
-  equipSlot: 0
-  healthToHeal: 20
+  <ID>k__BackingField: 
+  <MaximumStackCapacity>k__BackingField: 1
+  <Rarity>k__BackingField: 0
+  <Icon>k__BackingField:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+  <EquipSlot>k__BackingField: 0
+  <HealthToHeal>k__BackingField: 0

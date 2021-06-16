@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UniversalRPG.Items;
 
-public class InventorySystem
+public class Inventory
 {
     public class InventorySlot
     {
@@ -33,7 +33,7 @@ public class InventorySystem
     public int MaxInventoryCapacity { get; private set; }
     public readonly List<InventorySlot> InventorySlots = new List<InventorySlot>();
 
-    public InventorySystem(int inventoryCapacity)
+    public Inventory(int inventoryCapacity)
     {
         MaxInventoryCapacity = inventoryCapacity;
     }

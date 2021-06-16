@@ -4,12 +4,11 @@ namespace UniversalRPG.Items
 {
     public abstract class Weapon : Item, IEquipable, IUsable
     {
-        [SerializeField] private ItemEquipSlot equipSlot;
-        public ItemEquipSlot EquipSlot { get => equipSlot; }
+        [field: SerializeField] public ItemEquipSlot EquipSlot { get; protected set; }
 
-        public void Equip(PlayerControl player)
+        public void Equip(Equipment equipment)
         {
-            //
+            equipment.EquipItem(this);
         }
 
         public abstract void Use(PlayerControl player);

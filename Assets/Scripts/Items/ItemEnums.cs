@@ -10,4 +10,9 @@ namespace UniversalRPG.Items
         WEAPON, SECOND_WEAPON, HELMET, CHESTPLATE, POTION
     }
 
+    public enum ItemStatType
+    {
+        DEFENCE, ATTACK, ATTACK_SPEED, CRIT_CHANCE, MAX_HEALTH
+    }
+
 }

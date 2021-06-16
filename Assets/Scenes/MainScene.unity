@@ -456,9 +456,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44003b84a09ebb4c955825865f5b5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <PlayerHealth>k__BackingField: {fileID: 11400000, guid: 3ce52777c6636104c951a90d7c70a67f, type: 2}
   speed: 8
   startingInventoryCapacity: 20
-  health: {fileID: 11400000, guid: 3ce52777c6636104c951a90d7c70a67f, type: 2}
+  startingEquipment:
+  - {fileID: 11400000, guid: aa430bd01a6106e4ba87f6d7193b7635, type: 2}
+  - {fileID: 11400000, guid: 62f2b6d4a5accba4e990b9de7880fa88, type: 2}
 --- !u!54 &1092641194
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -506,6 +509,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsList:
   - {fileID: 11400000, guid: 82c36a4b30d1e9942a0c5adae671a18c, type: 2}
+  - {fileID: 11400000, guid: aa430bd01a6106e4ba87f6d7193b7635, type: 2}
+  - {fileID: 11400000, guid: 62f2b6d4a5accba4e990b9de7880fa88, type: 2}
 --- !u!4 &1167392756
 Transform:
   m_ObjectHideFlags: 0

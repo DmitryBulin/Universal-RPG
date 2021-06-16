@@ -5,19 +5,18 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "New Health", menuName = "Health")]
 public class Health : ScriptableObject
 {
-    [Range(0, 5000)] [SerializeField] private int maxHealth; 
-    public int MaxHealth { get => maxHealth; } 
+    [field: SerializeField] [field : Range(0, 5000)] public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
     public UnityEvent<int> HealthChanged { get; private set; } = new UnityEvent<int>();
 
     public void IncreaseMaxHealth(int maxHealthToAdd)
     {
-        maxHealth += maxHealthToAdd;
+        MaxHealth += maxHealthToAdd;
     }
 
     public void DecreaseMaxHealth(int maxHealthToSusbtract)
     {
-        maxHealth = Math.Min(1, maxHealth - maxHealthToSusbtract);
+        MaxHealth = Math.Min(1, MaxHealth - maxHealthToSusbtract);
     }
 
     public void AddHealth(int healthToAdd)
