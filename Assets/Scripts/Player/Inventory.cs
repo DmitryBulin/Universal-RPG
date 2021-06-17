@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UniversalRPG.Items;
+using UnityEngine.Events;
 
 public class Inventory
 {
@@ -32,21 +33,25 @@ public class Inventory
     
     public int MaxInventoryCapacity { get; private set; }
     public readonly List<InventorySlot> InventorySlots = new List<InventorySlot>();
+    public UnityEvent InventoryUpdated { get; } = new UnityEvent();
 
     public Inventory(int inventoryCapacity)
     {
         MaxInventoryCapacity = inventoryCapacity;
+        InventoryUpdated?.Invoke();
     }
 
     public void IncreaseInventoryCapacity(int capacityToAdd)
     {
         MaxInventoryCapacity += capacityToAdd;
+        InventoryUpdated?.Invoke();
     }
 
     public void DecreaseInventoryCapacity(int capacityToRemove)
     {
         MaxInventoryCapacity -= capacityToRemove;
-        //Remove items till capacity == max capacity
+        InventoryUpdated?.Invoke();
+        //TODO: Remove items till capacity == max capacity and drop last items on the ground
     }
 
     public bool AddItem(Item item, int quantityToAdd)
@@ -70,25 +75,32 @@ public class Inventory
                 }
                 else
                 {
+                    InventoryUpdated?.Invoke();
                     return false;
                 }
             }
         }
+        InventoryUpdated?.Invoke();
         return true;
     }
 
     public void RemoveItem(int slotID)
     {
         InventorySlots.Remove(InventorySlots.Find(x => x.ID == slotID));
+        InventoryUpdated?.Invoke();
     }
 
     public void DecreaseItemQuantity(int slotID, int decreasedQuantity)
     {
         InventorySlot slotToDecreaseQuantity = InventorySlots.Find(x => x.ID == slotID);
+
         int quantityToDecrease = Math.Min(decreasedQuantity, slotToDecreaseQuantity.Quantity);
         slotToDecreaseQuantity.DecreaseQuantity(quantityToDecrease);
+
         if (slotToDecreaseQuantity.Quantity == 0)
             InventorySlots.Remove(slotToDecreaseQuantity);
+
+        InventoryUpdated?.Invoke();
     }
 
     public void SortSlotsByItemID()
@@ -102,10 +114,8 @@ public class Inventory
                 return a.SlotItem.ID.CompareTo(b.SlotItem.ID);
             }
         );
-        for(int i = 0; i < InventorySlots.Count; i++)
-        {
-            InventorySlots[i].SetID(i);
-        }
+        UpdateSlotsID();
+        InventoryUpdated?.Invoke();
     }
 
     public void SortSlotsByItemName()
@@ -119,10 +129,8 @@ public class Inventory
                    return a.SlotItem.ItemName.CompareTo(b.SlotItem.ItemName);
                }
            );
-        for (int i = 0; i < InventorySlots.Count; i++)
-        {
-            InventorySlots[i].SetID(i);
-        }
+        UpdateSlotsID();
+        InventoryUpdated?.Invoke();
     }
 
     public void SortSlotByItemRarity()
@@ -136,10 +144,14 @@ public class Inventory
                 return a.SlotItem.Rarity.CompareTo(b.SlotItem.Rarity);
             }
         );
+        UpdateSlotsID();
+        InventoryUpdated?.Invoke();
+    }
+
+    private void UpdateSlotsID()
+    {
         for (int i = 0; i < InventorySlots.Count; i++)
-        {
             InventorySlots[i].SetID(i);
-        }
     }
 
 }

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 31593d85d140635438292202be16dca2
+  m_SerializeEntries:
+  - m_GUID: b48554cd27b5a6d4fa772da7ce37a425
+    m_Address: Assets/Sprites/SharpDagger.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: b48554cd27b5a6d4fa772da7ce37a425, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: b48554cd27b5a6d4fa772da7ce37a425, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 71d3cfdd729912e4b9d2f93f04ecb9a2, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7cc8d5d75f967e84ba8c0358ec9a7f65, type: 2}
+    - {fileID: 11400000, guid: 38ababfb30e6a654f826fb4bb42adb01, type: 2}

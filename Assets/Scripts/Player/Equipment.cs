@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniversalRPG.Items;
@@ -37,6 +36,8 @@ public class Equipment
             case ItemEquipSlot.POTION:
                 EquipPotion((Potion)equipable);
                 break;
+            default:
+                throw new System.Exception($"No behaviour in equipment for equip slot {equipable.EquipSlot}!");
         }
     }
 

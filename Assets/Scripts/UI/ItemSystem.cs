@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UniversalRPG.Items;
 
 namespace UniversalRPG
 {
+    /*
+      TODO:
+        1. Handle loading/unloading item sprites and models
+        2. Create localisation of item names and descriptions either here or in separate script
+    */
 
     public class ItemSystem : MonoBehaviour
     {
@@ -37,16 +41,13 @@ namespace UniversalRPG
             return itemToReturn;
         }
 
-        public void SetItemIcon(Image image, Item item)
+        public void SetItemIcon(SpriteWrapper spriteWrapper, Item item)
         {
-            item.Icon.LoadAssetAsync<Sprite>().Completed += t => image.sprite = t.Result;
+            if (item.Icon.IsValid())
+                item.Icon.OperationHandle.Completed += t => spriteWrapper.SetSprite((Sprite)t.Result);
+            else
+                item.Icon.LoadAssetAsync<Sprite>().Completed += t => spriteWrapper.SetSprite(t.Result);
         }
-
-        public void SetItemIcon(SpriteRenderer spriteRenderer, Item item)
-        {
-            item.Icon.LoadAssetAsync<Sprite>().Completed += t => spriteRenderer.sprite = t.Result;
-        }
-
     }
-
+        
 }

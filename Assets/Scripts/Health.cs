@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Health : ScriptableObject
 {
     [field: SerializeField] [field : Range(0, 5000)] public int MaxHealth { get; private set; }
-    public int CurrentHealth { get; private set; }
+    [field: SerializeField] public int CurrentHealth { get; private set; }
     public UnityEvent<int> HealthChanged { get; private set; } = new UnityEvent<int>();
 
     public void IncreaseMaxHealth(int maxHealthToAdd)

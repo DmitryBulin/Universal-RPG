@@ -2,16 +2,21 @@ using UnityEngine;
 
 namespace UniversalRPG.Items
 {
-    public abstract class Weapon : Item, IEquipable, IUsable
+    [CreateAssetMenu(fileName = "New Weapon", menuName = "Items/Weapon")]
+    public class Weapon : Item, IEquipable, IUsable
     {
         [field: SerializeField] public ItemEquipSlot EquipSlot { get; protected set; }
+        [field: SerializeField] [field: Range(0, 5000)] public int Damage { get; private set; }
 
         public void Equip(Equipment equipment)
         {
             equipment.EquipItem(this);
         }
 
-        public abstract void Use(PlayerControl player);
+        public void Use(PlayerControl player)
+        {
+            //Make attack with damage set in weapon
+        }
 
     }
 }
