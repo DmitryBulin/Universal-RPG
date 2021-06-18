@@ -4,6 +4,11 @@ using System.Linq;
 using UniversalRPG.Items;
 using UnityEngine.Events;
 
+public enum InventorySortSetting
+{
+    ID, NAME, RARITY
+}
+
 public class Inventory
 {
     public class InventorySlot
@@ -34,6 +39,13 @@ public class Inventory
     public int MaxInventoryCapacity { get; private set; }
     public readonly List<InventorySlot> InventorySlots = new List<InventorySlot>();
     public UnityEvent InventoryUpdated { get; } = new UnityEvent();
+
+    private static readonly Dictionary<InventorySortSetting, Func<InventorySlot, InventorySlot, int>> sortFuncs = new Dictionary<InventorySortSetting, Func<InventorySlot, InventorySlot, int>>
+    {
+        [InventorySortSetting.ID] = (InventorySlot a, InventorySlot b) => a.SlotItem.ID.CompareTo(b.SlotItem.ID),
+        [InventorySortSetting.NAME] = (InventorySlot a, InventorySlot b) => a.SlotItem.ItemName.CompareTo(b.SlotItem.ItemName),
+        [InventorySortSetting.RARITY] = (InventorySlot a, InventorySlot b) => a.SlotItem.Rarity.CompareTo(b.SlotItem.Rarity)
+    };
 
     public Inventory(int inventoryCapacity)
     {
@@ -103,47 +115,15 @@ public class Inventory
         InventoryUpdated?.Invoke();
     }
 
-    public void SortSlotsByItemID()
+    public void SortSlots(InventorySortSetting sortSetting)
     {
-        InventorySlots.Sort(
-            delegate(InventorySlot a, InventorySlot b)
-            {
-                if (a == null && b == null) return 0;
-                if (a == null) return -1;
-                if (b == null) return 1;
-                return a.SlotItem.ID.CompareTo(b.SlotItem.ID);
-            }
-        );
-        UpdateSlotsID();
-        InventoryUpdated?.Invoke();
-    }
-
-    public void SortSlotsByItemName()
-    {
-        InventorySlots.Sort(
-               delegate (InventorySlot a, InventorySlot b)
-               {
-                   if (a == null && b == null) return 0;
-                   if (a == null) return -1;
-                   if (b == null) return 1;
-                   return a.SlotItem.ItemName.CompareTo(b.SlotItem.ItemName);
-               }
-           );
-        UpdateSlotsID();
-        InventoryUpdated?.Invoke();
-    }
-
-    public void SortSlotByItemRarity()
-    {
-        InventorySlots.Sort(
-            delegate (InventorySlot a, InventorySlot b)
-            {
-                if (a == null && b == null) return 0;
-                if (a == null) return -1;
-                if (b == null) return 1;
-                return a.SlotItem.Rarity.CompareTo(b.SlotItem.Rarity);
-            }
-        );
+        InventorySlots.Sort(delegate (InventorySlot a, InventorySlot b)
+        {
+            if (a == null && b == null) return 0;
+            if (a == null) return -1;
+            if (b == null) return 1;
+            return sortFuncs[sortSetting](a, b);
+        });
         UpdateSlotsID();
         InventoryUpdated?.Invoke();
     }
